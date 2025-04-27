@@ -1,0 +1,44 @@
+---
+# Handlers for various services
+
+- name: restart uptime-kuma
+  systemd:
+    name: uptime-kuma
+    state: restarted
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: restart docker
+  systemd:
+    name: docker
+    state: restarted
+
+- name: reload firewall
+  systemd:
+    name: firewalld
+    state: reloaded
+
+- name: reload sysctl
+  command: sysctl -p /etc/sysctl.d/99-hardening.conf
+
+- name: restart fail2ban
+  systemd:
+    name: fail2ban
+    state: restarted
+
+- name: restart auditd
+  systemd:
+    name: auditd
+    state: restarted
+
+- name: restart chronyd
+  systemd:
+    name: chronyd
+    state: restarted
+
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted 

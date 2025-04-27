@@ -1,0 +1,52 @@
+---
+# Systeem configuratie
+hostname: "localhost"  # Voor lokale test
+timezone: "Europe/Brussels"
+enable_selinux: true
+
+# Docker configuratie
+docker_compose_version: "2.17.2"
+docker_users:
+  - "{{ ansible_user }}"
+
+# Uptime Kuma configuratie
+uptime_kuma_version: "latest"
+uptime_kuma_port: 3001
+uptime_kuma_container_name: "uptime-kuma"
+uptime_kuma_data_dir: "/opt/uptime-kuma"
+
+# SSL/TLS configuratie
+enable_ssl: false  # Uitgeschakeld voor lokale test
+ssl_email: "your.email@example.com"
+ssl_staging: true  # Staging mode voor testen
+ssl_renewal_frequency: "daily"
+
+# Firewall configuratie
+firewall_default_policy: "drop"
+firewall_allowed_ports:
+  - port: 22
+    protocol: tcp
+    comment: "SSH access"
+  - port: 3001
+    protocol: tcp
+    comment: "Uptime Kuma web interface"
+
+# Backup configuratie
+enable_backups: true
+backup_retention_days: 7
+backup_dir: "/opt/backups/uptime-kuma"
+
+# Security configuratie
+fail2ban_enable: true
+fail2ban_bantime: 3600
+fail2ban_findtime: 600
+fail2ban_maxretry: 5
+
+# Monitoring configuratie
+enable_monitoring: false  # Uitgeschakeld voor initiële test
+monitoring_email: "your.email@example.com"
+
+# Logging configuratie
+enable_remote_logging: false
+syslog_server: ""
+log_retention_days: 30 
